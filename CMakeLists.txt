@@ -38,3 +38,8 @@ if(ENABLE_CPPCHECK)
     include(cppcheck)
     add_cppcheck_target("${SRCS} ${HEADERS}")
 endif(ENABLE_CPPCHECK)
+
+# gcov
+if(ENABLE_GCOV)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+endif(ENABLE_GCOV)

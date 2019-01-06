@@ -32,13 +32,13 @@ matrix:
     # cppcheck
     - os: linux
       env:
-        - BuildType="Cppcheck & MISRA C 2012"
+        - BuildType = "Cppcheck & MISRA C 2012"
       script: scripts/build/cppcheck.sh
 
     # coverity scan
     - os: linux
       env:
-        - BuildType="Coverity scan"
+        - BuildType = "Coverity scan"
       if: branch = coverity_scan
       before_install:
         - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
@@ -50,3 +50,13 @@ matrix:
           notification_email: "huchijwk@gmail.com"
           build_command: "scripts/build/default.sh"
           branch_pattern: coverity_scan
+
+    # coverall
+    - os: linux
+      env:
+        - BuildType = "Coverall"
+      before_install:
+        - pip install --user cpp-coveralls
+      script: scripts/build/gcov.sh
+      after_success:
+        - coveralls --exclude lib --exclude tests --gcov-options '\-lp'
