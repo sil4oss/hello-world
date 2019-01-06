@@ -25,7 +25,7 @@ env:
     # Coverity Scan Token
     - secure: "rnl7rWu0J06JZUmgDsjOjSMqUijKVtL65E6FFkZZ5uezZNfvw7Dr4r4JSlGCOML5CfjoRsx+++jiPxXUxn9oi2+HbnbUJ0xZY68M7Bu34XQxOhXjLMiillieGYehtpZ8yUBjYUUQlMyjbj1jrnGmGivjca+gus0X957H8ibEJ3Q50HjsWvflLkfTYJ5lvB15xZ6ph+wAYW0ZzyqorrbSAQHIXUT4G/YEJDPgQQ0h2NRR4iSzo0XHm7+71czYb9T8BJKMfbm6IRuTTW409kfBXv7anrujAnGjz2+7C+Xmrk1ms1AOESuAlag4mhlr6MUI2blYXX6M1WQ0T63QKIIj33XKAUdAIq9SFaAeukDI6jmThY0GHDqgVMVSGG76qkj7XE47Q0Fc0ma6joNlIw7RgRAFL5b4f997RkTsesFEq4FYfHNuY6da6awP+gW00KIIrVQ0VjrV/zwirbdPlUfyCsWJBlNpC3MZeb07hzP9uH4n38EPC9QRgAxRc9VmawSBEEYA6LXeidR2Qn2AU21YiHJ+/4FiiJsrw2vvyR8jHzavQ7NW3pKAaMvSokN8kRWdUfhIS6/s8m7Inf+JNJv2zzP/5AXBXiY7CnhM6zSYTvqH86//wOMo1A090eLMfhS0T7lT0dBi5kh0VaI2w3nN1jb6NX646vvjqIlNHPVMUWc="
 
-script: if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then scripts/build/default.sh; fi
+script: if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then scripts/build.sh; fi
 
 matrix:
   include:
@@ -33,7 +33,7 @@ matrix:
     - os: linux
       env:
         - BuildType = "Cppcheck & MISRA C 2012"
-      script: scripts/build/cppcheck.sh
+      script: scripts/cppcheck.sh
 
     # coverity scan
     - os: linux
@@ -48,7 +48,7 @@ matrix:
             name: "sil4oss/hello-world"
             description: "Hello World"
           notification_email: "huchijwk@gmail.com"
-          build_command: "scripts/build/default.sh"
+          build_command: "scripts/build.sh"
           branch_pattern: coverity_scan
 
     # coverall
@@ -57,6 +57,6 @@ matrix:
         - BuildType = "Coverall"
       before_install:
         - pip install --user cpp-coveralls
-      script: scripts/build/gcov.sh
+      script: scripts/coverage.sh
       after_success:
         - coveralls --exclude lib --exclude tests --gcov-options '\-lp'
