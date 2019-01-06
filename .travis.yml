@@ -1,4 +1,5 @@
-# Project Template
+#
+# Hello World 
 #
 # Copyright (C) 2018 sil4oss
 # Author: Wonguk Jeong <huchijwk@gmail.com>
@@ -23,3 +24,8 @@ compiler:
   - clang
   - gcc
 
+matrix:
+  include:
+    # cppcheck
+    - os: linux
+      script: scripts/build/cppcheck.sh
