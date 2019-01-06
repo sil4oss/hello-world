@@ -20,9 +20,6 @@
 
 language: cpp
 dist: xenial
-compiler:
-  - clang
-  - gcc
 
 matrix:
   include:
