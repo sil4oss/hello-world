@@ -7,6 +7,6 @@ BUILDDIR=$BASEDIR/build
 mkdir $BUILDDIR
 pushd $BUILDDIR
 
-cmake -DENABLE_CPPCHECK=1 ..
-make -j$((`nproc`+1)) cppcheck
+cmake ..
+make -j$((`nproc`+1))
 popd

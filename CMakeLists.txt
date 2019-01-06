@@ -34,5 +34,7 @@ add_executable(${PROJECT_NAME} ${SRCS})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # cppcheck & MISRA C 2012
-include(cppcheck)
-add_cppcheck_target("${SRCS} ${HEADERS}")
+if(ENABLE_CPPCHECK)
+    include(cppcheck)
+    add_cppcheck_target("${SRCS} ${HEADERS}")
+endif(ENABLE_CPPCHECK)
